@@ -21,16 +21,16 @@ return [
              'allowed_methods' => ['GET'],
          ],
          [
-             'name' => 'checkout/display',
-             'path' => '/checkout/{step:[a-z-]+}',
-             'middleware' => App\Checkout\CheckoutAction::class,
-             'allowed_methods' => ['GET', 'POST'],
-         ],
-         [
              'name' => 'order',
              'path' => '/order',
              'middleware' => App\OrderAction::class,
              'allowed_methods' => ['GET'],
+         ],
+         [
+             'name' => 'checkout/display',
+             'path' => '/checkout/{step:[a-z-]+}',
+             'middleware' => App\Checkout\CheckoutAction::class,
+             'allowed_methods' => ['GET', 'POST'],
          ],
     ],
 ];

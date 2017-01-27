@@ -1,0 +1,21 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block content %}
+    <form method="post">
+        <div class="radio">
+            <label>
+                <input type="radio" name="paymentMethod" value="Bank Transfer" />
+                Bank Transfer
+            </label>
+        </div>
+
+        <div class="radio">
+            <label>
+                <input type="radio" name="paymentMethod" value="PayPal" />
+                PayPal
+            </label>
+        </div>
+
+        <button class="btn btn-primary">Next</button>
+    </form>
+{% endblock %}

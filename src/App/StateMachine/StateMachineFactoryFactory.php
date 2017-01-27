@@ -22,19 +22,19 @@ final class StateMachineFactoryFactory
                 Order::STATUS_REFUNDED,
             ],
             'transitions' => [
-                'create' => [
+                Order::TRANSITION_CREATE => [
                     'from' => [Order::STATUS_NEW],
                     'to'   => Order::STATUS_PENDING,
                 ],
-                'cancel' => [
+                Order::TRANSITION_CANCEL => [
                     'from' => [Order::STATUS_NEW, Order::STATUS_PENDING],
                     'to'   => Order::STATUS_CANCELED,
                 ],
-                'complete' => [
+                Order::TRANSITION_COMPLETE => [
                     'from' => [Order::STATUS_PENDING],
                     'to'   => Order::STATUS_COMPLETED,
                 ],
-                'refund' => [
+                Order::TRANSITION_REFUND => [
                     'from' => [Order::STATUS_COMPLETED],
                     'to'   => Order::STATUS_REFUNDED,
                 ],

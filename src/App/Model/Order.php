@@ -5,11 +5,16 @@ namespace App\Model;
 
 final class Order
 {
-    const STATUS_NEW         = 'new';
-    const STATUS_PENDING     = 'pending';
-    const STATUS_COMPLETED   = 'completed';
-    const STATUS_CANCELED    = 'canceled';
-    const STATUS_REFUNDED    = 'refunded';
+    const STATUS_NEW = 'new';
+    const STATUS_PENDING = 'pending';
+    const STATUS_COMPLETED = 'completed';
+    const STATUS_CANCELED = 'canceled';
+    const STATUS_REFUNDED = 'refunded';
+
+    const TRANSITION_CREATE = 'create';
+    const TRANSITION_CANCEL = 'cancel';
+    const TRANSITION_COMPLETE = 'complete';
+    const TRANSITION_REFUND = 'refund';
 
     private $status = self::STATUS_NEW;
 

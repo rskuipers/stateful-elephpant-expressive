@@ -8,7 +8,7 @@ use App\Checkout\Steps\Payment;
 use App\Checkout\Steps\Review;
 use Aura\Session\Session;
 use Interop\Container\ContainerInterface;
-use SM\Factory\Factory as StateMachineFactory;
+use SM\Factory\Factory;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
@@ -17,8 +17,10 @@ final class CheckoutActionFactory
     public function __invoke(ContainerInterface $container): CheckoutAction
     {
         $session = $container->get(Session::class);
-        $stateMachineFactory = $container->get(StateMachineFactory::class);
-        $orderStateMachine = $stateMachineFactory->get($session->getSegment('app')->get('order'));
+        $order = $session->getSegment('app')->get('order');
+
+        $stateMachineFactory = $container->get(Factory::class);
+        $orderStateMachine = $stateMachineFactory->get($order);
 
         $steps = [
             new Details($container->get(TemplateRendererInterface::class)),

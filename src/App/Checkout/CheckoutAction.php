@@ -58,7 +58,7 @@ final class CheckoutAction
     private function proceed(Step $currentStep, Proceed $result): RedirectResponse
     {
         if ($result->hasNextStep()) {
-            return new RedirectResponse($this->router->generateUri('checkout/display', [
+            return new RedirectResponse($this->router->generateUri('checkout/step', [
                 'step' => $result->getNextStep(),
             ]));
         }
@@ -80,6 +80,6 @@ final class CheckoutAction
         }
 
         $step = $this->steps[$stepNumber];
-        return new RedirectResponse($this->router->generateUri('checkout/display', ['step' => $step->getName()]));
+        return new RedirectResponse($this->router->generateUri('checkout/step', ['step' => $step->getName()]));
     }
 }

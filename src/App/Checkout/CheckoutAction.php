@@ -5,6 +5,7 @@ namespace App\Checkout;
 
 use App\Checkout\Result\Proceed;
 use App\Checkout\Steps\Step;
+use Aura\Session\Segment;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\RedirectResponse;
@@ -31,8 +32,8 @@ final class CheckoutAction
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
         $currentStep = $this->currentStep($request);
-        $session = $request->getAttribute(\DaMess\Http\SessionMiddleware::KEY);
-        $order = $session->getSegment('app')->get('order');
+
+        $order = $this->getSession($request)->get('order');
 
         if ($request->getMethod() === 'POST') {
             $result = $currentStep->process($request, $order);
@@ -81,5 +82,10 @@ final class CheckoutAction
 
         $step = $this->steps[$stepNumber];
         return new RedirectResponse($this->router->generateUri('checkout/display', ['step' => $step->getName()]));
+    }
+
+    private function getSession(ServerRequestInterface $request): Segment
+    {
+        return $request->getAttribute(\DaMess\Http\SessionMiddleware::KEY)->getSegment('app');
     }
 }

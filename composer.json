@@ -13,7 +13,8 @@
         "zendframework/zend-expressive-fastroute": "^1.0",
         "xtreamwayz/pimple-container-interop": "^1.0",
         "zendframework/zend-expressive-twigrenderer": "^1.0",
-        "damess/expressive-session-middleware": "^1.0"
+        "damess/expressive-session-middleware": "^1.0",
+        "winzou/state-machine": "^0.3.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",

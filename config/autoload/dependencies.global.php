@@ -22,6 +22,8 @@ return [
 
             DaMess\Http\SessionMiddleware::class => DaMess\Factory\SessionMiddlewareFactory::class,
             Aura\Session\Session::class => DaMess\Factory\AuraSessionFactory::class,
+
+            \SM\Factory\Factory::class => \App\StateMachine\StateMachineFactoryFactory::class,
         ],
     ],
 ];

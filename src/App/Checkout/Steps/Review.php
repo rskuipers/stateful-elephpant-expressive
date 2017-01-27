@@ -8,6 +8,7 @@ use App\Checkout\Result\Result;
 use App\Model\Order;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use SM\StateMachine\StateMachineInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
@@ -15,9 +16,12 @@ final class Review implements Step
 {
     private $templateRenderer;
 
-    public function __construct(TemplateRendererInterface $templateRenderer)
+    private $orderStateMachine;
+
+    public function __construct(TemplateRendererInterface $templateRenderer, StateMachineInterface $orderStateMachine)
     {
         $this->templateRenderer = $templateRenderer;
+        $this->orderStateMachine = $orderStateMachine;
     }
 
     public function display(ServerRequestInterface $request, Order $order): ResponseInterface
@@ -29,7 +33,7 @@ final class Review implements Step
 
     public function process(ServerRequestInterface $request, Order $order): Result
     {
-        $order->setStatus(Order::STATUS_PENDING);
+        $this->orderStateMachine->apply('create');
         return Proceed::toNextStep();
     }
 
